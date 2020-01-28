@@ -47,7 +47,7 @@ Add the keys below to your `info.plist` file. Don't forget to change the descrip
 ```
 
 ## Usage
-1. Import `FMCamera` in which class you want to use.
+1. `import FMCamera` in which class you want to use.
 2. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
 3. Update configuration parameters if necessary.
 4. Configure fmcamera with `configure()` function
