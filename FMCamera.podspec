@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'FMCamera'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of FMCamera.'
+  s.summary          = 'FMCamera is a simple camera view which let us capture photo or video in a given size.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+'FMCamera is a simple camera view which let us capture photo or video in a given size. You can capture square videos. There are two Protocols which provide communication between your view controllers and fmcamera view. You can set maximum picture size and configure audio, video and picture settings if you want.'
                        DESC
 
   s.homepage         = 'https://github.com/gokhanmandaci/FMCamera'
@@ -26,11 +26,12 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'gokhanmandaci' => 'gokhanmandaci@gmail.com' }
   s.source           = { :git => 'https://github.com/gokhanmandaci/FMCamera.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/gokhanmandaci
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.0'
 
   s.source_files = 'FMCamera/Classes/**/*'
+  s.swift_version = '5.0'
   
   # s.resource_bundles = {
   #   'FMCamera' => ['FMCamera/Assets/*.png']
