@@ -62,14 +62,14 @@ In your view controller after creating a FMCamera object, for example called `fm
 
 ```
 override func viewDidLoad() {
-	super.viewDidLoad()
+    super.viewDidLoad()
         
-  	squareCameraDelegate = self
-	scCapturePhotoDelegate = self
+    squareCameraDelegate = self
+    scCapturePhotoDelegate = self
         
     // You can update configuration parameters here
     // or you can just use default ones.
-   	vwSquareCamera.configure()
+    vwSquareCamera.configure()
 }
 ```
 
