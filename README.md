@@ -120,7 +120,7 @@ Usage examples are added to code documentation. Option+click on parameter to see
 We have two types of configuration parameters. Before calling `fmcamera.configure()` and before taking a photo.
 
 ### Before `configure()`:
-
+```
 ///Flash mode for capturing.<br/>
 var flashMode: AVCaptureDevice.FlashMode = .auto
 
@@ -132,9 +132,10 @@ var videoSettings: [String: Any] = [:]
 
 /// Audio settings for audio capturing<br/>
 var audioSettings: [String: Any] = [:]
+```
 
 ### Before Taking a Photo:
-
+```
 /// Update this for save the photo to your Photos.<br/>
 var willSavePhotoToPhotos: Bool = false
 
@@ -146,7 +147,7 @@ var saveReducedImageToPhotos: Bool = false
 
 /// Set max picture file size in bytes.<br/>
 var maxPictureFileSize: Int = 400000
-
+```
 
 ## Resources Used: <br/>
 https://stackoverflow.com/a/44917862 <br/>
