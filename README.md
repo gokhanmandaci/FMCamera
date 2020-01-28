@@ -106,37 +106,36 @@ We have two types of configuration parameters. Before calling `fmcamera.configur
 
 Before `configure()`:
 
-///Flash mode for capturing.
+///Flash mode for capturing.<br/>
 var flashMode: AVCaptureDevice.FlashMode = .auto
 
-/// Capture photo format.
+/// Capture photo format.<br/>
 var photoSettingsFormat: [String: Any]?
 
-/// Video settings for recording video.
+/// Video settings for recording video.<br/>
 var videoSettings: [String: Any] = [:]
 
-/// Audio settings for audio capturing
+/// Audio settings for audio capturing<br/>
 var audioSettings: [String: Any] = [:]
 
 
 Before Taking a Photo:
 
-/// Update this for save the photo to your Photos.
+/// Update this for save the photo to your Photos.<br/>
 var willSavePhotoToPhotos: Bool = false
 
-/// Update this for save the video to your Photos.
+/// Update this for save the video to your Photos.<br/>
 var willSaveVideoToPhotos: Bool = false
 
-/// Save original or save reduced image to photo roll. Works if `willSaveVideoToPhotos` is true.
+/// Save original or save reduced image to photo roll. Works if `willSaveVideoToPhotos` is true.<br/>
 var saveReducedImageToPhotos: Bool = false
 
-/// Set max picture file size in bytes.
+/// Set max picture file size in bytes.<br/>
 var maxPictureFileSize: Int = 400000
 
 
-Resources used: 
-https://www.appcoda.com/avfoundation-swift-guide/
-
+Resources used: <br/>
+https://www.appcoda.com/avfoundation-swift-guide/ <br/>
 https://stackoverflow.com/a/44917862
 
 Happy coding!
