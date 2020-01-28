@@ -65,8 +65,8 @@ In your view controller after creating a FMCamera object, for example called `fm
 override func viewDidLoad() {
     super.viewDidLoad()
         
-    squareCameraDelegate = self
-    scCapturePhotoDelegate = self
+    fmCapturePhotoDelegate = self
+    fmCaptureVideoDelegate = self
         
     // You can update configuration parameters here
     // or you can just use default ones.
