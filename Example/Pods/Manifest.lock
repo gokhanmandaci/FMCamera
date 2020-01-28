@@ -1,0 +1,27 @@
+PODS:
+  - FMCamera (0.1.0)
+  - Nimble (7.3.4)
+  - Quick (1.2.0)
+
+DEPENDENCIES:
+  - FMCamera (from `../`)
+  - Nimble (~> 7.0)
+  - Quick (~> 1.2.0)
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  FMCamera:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FMCamera: 43b97ae0b84166bbf5ab7b2f56328243bbc5afde
+  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+
+PODFILE CHECKSUM: 90833fbaf3ab8ab728418f60ce2589e852ed5f75
+
+COCOAPODS: 1.8.4

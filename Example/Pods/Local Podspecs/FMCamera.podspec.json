@@ -1,0 +1,22 @@
+{
+  "name": "FMCamera",
+  "version": "0.1.0",
+  "summary": "A short description of FMCamera.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/gokhanmandaci/FMCamera",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gokhanmandaci": "gokhanmandaci@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gokhanmandaci/FMCamera.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "FMCamera/Classes/**/*"
+}
