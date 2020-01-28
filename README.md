@@ -15,7 +15,9 @@ Built using XCode 11.3.1 (Swift 5)
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-### Manual Installation
+## Installation
+
+### Manual
 
 1. Clone this repo
 2. Navigate to project folder
@@ -31,7 +33,7 @@ it, simply add the following line to your Podfile:
 pod 'FMCamera'
 ```
 
-### Usage
+## Usage
 1. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
 2. Update configuration parameters if necessary.
 3. Configure fmcamera with `configure()` function
@@ -39,11 +41,11 @@ pod 'FMCamera'
 5. Write extensions for picture and/or video protocols.
 6. Protocol functions will return images or video urls, use them.
 
-### Code
+## Code
 
 In your view controller after creating a FMCamera object, for example called `fmCamera`
 
-Configuration:
+### Configuration
 
 ```
 override func viewDidLoad() {
@@ -58,7 +60,7 @@ override func viewDidLoad() {
 }
 ```
 
-Capture:
+### Capture
 
 ```
 // Take Photo
@@ -72,7 +74,7 @@ if !fmCamera.isCameraRecording {
 }
 ```
 
-Protocols:
+### Protocols
 
 ```
 extension ViewController: FMCaptureVideoProtocol {
@@ -99,12 +101,12 @@ extension ViewController: FMCapturePhotoProtocol {
 }
 ```
 
-Configuration Parameters:
+## Configuration Parameters
 
 Usage examples are added to code documentation. Option+click on parameter to see usage examples.
 We have two types of configuration parameters. Before calling `fmcamera.configure()` and before taking a photo.
 
-Before `configure()`:
+### Before `configure()`:
 
 ///Flash mode for capturing.<br/>
 var flashMode: AVCaptureDevice.FlashMode = .auto
@@ -118,8 +120,7 @@ var videoSettings: [String: Any] = [:]
 /// Audio settings for audio capturing<br/>
 var audioSettings: [String: Any] = [:]
 
-
-Before Taking a Photo:
+### Before Taking a Photo:
 
 /// Update this for save the photo to your Photos.<br/>
 var willSavePhotoToPhotos: Bool = false
@@ -134,7 +135,7 @@ var saveReducedImageToPhotos: Bool = false
 var maxPictureFileSize: Int = 400000
 
 
-Resources used: <br/>
+## Resources Used: <br/>
 https://www.appcoda.com/avfoundation-swift-guide/ <br/>
 https://stackoverflow.com/a/44917862
 
