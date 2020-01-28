@@ -33,6 +33,19 @@ it, simply add the following line to your Podfile:
 pod 'FMCamera'
 ```
 
+## Permissions
+
+Add the keys below to your `info.plist` file. Don't forget to change the description texts.
+
+```
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Photo library usage description</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Microphone usage description</string>
+<key>NSCameraUsageDescription</key>
+<string>Camera usage description</string>
+```
+
 ## Usage
 1. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
 2. Update configuration parameters if necessary.
