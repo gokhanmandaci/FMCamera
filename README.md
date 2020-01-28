@@ -148,5 +148,3 @@ gokhanmandaci, gokhanmandaci@gmail.com
 ## License
 
 FMCamera is available under the MIT license. See the LICENSE file for more info.
-
-Happy coding!
