@@ -139,12 +139,14 @@ var maxPictureFileSize: Int = 400000
 https://stackoverflow.com/a/44917862 <br/>
 https://www.appcoda.com/avfoundation-swift-guide/
 
-Happy coding!
 
 ## Author
 
 gokhanmandaci, gokhanmandaci@gmail.com
 
+
 ## License
 
 FMCamera is available under the MIT license. See the LICENSE file for more info.
+
+Happy coding!
