@@ -19,7 +19,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 1. Clone this repo
 2. Navigate to project folder
-3. Copy `FMCameraView` to your project
+3. Copy `Source` to your project
 
 
 ### Using Cocoapods
