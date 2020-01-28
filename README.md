@@ -47,12 +47,13 @@ Add the keys below to your `info.plist` file. Don't forget to change the descrip
 ```
 
 ## Usage
-1. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
-2. Update configuration parameters if necessary.
-3. Configure fmcamera with `configure()` function
-4. Use picture, video or both delegates
-5. Write extensions for picture and/or video protocols.
-6. Protocol functions will return images or video urls, use them.
+1. Import `FMCamera` in which class you want to use.
+2. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
+3. Update configuration parameters if necessary.
+4. Configure fmcamera with `configure()` function
+5. Use picture, video or both delegates
+6. Write extensions for picture and/or video protocols.
+7. Protocol functions will return images or video urls, use them.
 
 ## Code
 
