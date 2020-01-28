@@ -1,8 +1,8 @@
 # FMCamera
 
-[![CI Status](https://img.shields.io/travis/gokhanmandaci/FMCamera.svg?style=flat)](https://travis-ci.org/gokhanmandaci/FMCamera)
+<!---[![CI Status](https://img.shields.io/travis/gokhanmandaci/FMCamera.svg?style=flat)](https://travis-ci.org/gokhanmandaci/FMCamera)--->
 [![Version](https://img.shields.io/cocoapods/v/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)
-[![License](https://img.shields.io/cocoapods/l/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)
+<!---[![License](https://img.shields.io/cocoapods/l/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)--->
 [![Platform](https://img.shields.io/cocoapods/p/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)
 
 ## Example
