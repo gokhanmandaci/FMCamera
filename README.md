@@ -5,13 +5,24 @@
 <!---[![License](https://img.shields.io/cocoapods/l/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)--->
 [![Platform](https://img.shields.io/cocoapods/p/FMCamera.svg?style=flat)](https://cocoapods.org/pods/FMCamera)
 
+Simple camera view which can take pictures and capture photos. Camera view crops pictures and videos with a given size.
+You can capture square videos. There are two Protocols which provide communication between your view controllers and fmcamera view.
+You can set maximum picture size and configure audio, video and picture settings if you want.
+
+Built using XCode 11.3.1 (Swift 5)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+### Manual Installation
 
-## Installation
+1. Clone this repo
+2. Navigate to project folder
+3. Copy `FMCameraView` to your project
+
+
+### Using Cocoapods
 
 FMCamera is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -19,6 +30,116 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'FMCamera'
 ```
+
+### Usage
+1. You can create a camera view on your storyboard or you can create it with code. Use Class named `FMCamera`
+2. Update configuration parameters if necessary.
+3. Configure fmcamera with `configure()` function
+4. Use picture, video or both delegates
+5. Write extensions for picture and/or video protocols.
+6. Protocol functions will return images or video urls, use them.
+
+### Code
+
+In your view controller after creating a FMCamera object, for example called `fmCamera`
+
+Configuration:
+
+```
+override func viewDidLoad() {
+	super.viewDidLoad()
+        
+  	squareCameraDelegate = self
+	scCapturePhotoDelegate = self
+        
+    // You can update configuration parameters here
+    // or you can just use default ones.
+   	vwSquareCamera.configure()
+}
+```
+
+Capture:
+
+```
+// Take Photo
+vwSquareCamera.takePhoto()
+
+// Capture Video
+if !fmCamera.isCameraRecording {
+    vwSquareCamera.startRecording()
+} else {
+    vwSquareCamera.stopRecording()
+}
+```
+
+Protocols:
+
+```
+extension ViewController: FMCaptureVideoProtocol {
+    func recordingStarted(_ error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func recordingFinished(_ videoUrl: URL?, _ error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        } else {
+            /// Use recorded video url
+        }
+    }
+}
+
+
+extension ViewController: FMCapturePhotoProtocol {
+    func captured(_ image: UIImage) {
+        /// Use captured and optimized image
+    }
+}
+```
+
+Configuration Parameters:
+
+Usage examples are added to code documentation. Option+click on parameter to see usage examples.
+We have two types of configuration parameters. Before calling `fmcamera.configure()` and before taking a photo.
+
+Before `configure()`:
+
+///Flash mode for capturing.
+var flashMode: AVCaptureDevice.FlashMode = .auto
+
+/// Capture photo format.
+var photoSettingsFormat: [String: Any]?
+
+/// Video settings for recording video.
+var videoSettings: [String: Any] = [:]
+
+/// Audio settings for audio capturing
+var audioSettings: [String: Any] = [:]
+
+
+Before Taking a Photo:
+
+/// Update this for save the photo to your Photos.
+var willSavePhotoToPhotos: Bool = false
+
+/// Update this for save the video to your Photos.
+var willSaveVideoToPhotos: Bool = false
+
+/// Save original or save reduced image to photo roll. Works if `willSaveVideoToPhotos` is true.
+var saveReducedImageToPhotos: Bool = false
+
+/// Set max picture file size in bytes.
+var maxPictureFileSize: Int = 400000
+
+
+Resources used: 
+https://www.appcoda.com/avfoundation-swift-guide/
+
+https://stackoverflow.com/a/44917862
+
+Happy coding!
 
 ## Author
 
