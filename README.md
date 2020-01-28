@@ -136,8 +136,8 @@ var maxPictureFileSize: Int = 400000
 
 
 ## Resources Used: <br/>
-https://www.appcoda.com/avfoundation-swift-guide/ <br/>
-https://stackoverflow.com/a/44917862
+https://stackoverflow.com/a/44917862 <br/>
+https://www.appcoda.com/avfoundation-swift-guide/
 
 Happy coding!
 
