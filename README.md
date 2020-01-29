@@ -148,12 +148,15 @@ var saveReducedImageToPhotos: Bool = false
 
 /// Set max picture file size in bytes.<br/>
 var maxPictureFileSize: Int = 400000
+
+/// Decide if the captured photo rotates upwards. After capturing, photo always oriented upwards if you set this flag to true.<br/>
+var rotateCapturedPhotoUpwards: Bool = false
 ```
 
 ## Resources Used: <br/>
 https://stackoverflow.com/a/44917862 <br/>
-https://www.appcoda.com/avfoundation-swift-guide/
-
+https://www.appcoda.com/avfoundation-swift-guide/ <br/>
+https://stackoverflow.com/a/32041649
 
 ## Author
 
