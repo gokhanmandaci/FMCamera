@@ -151,14 +151,15 @@ var willSavePhotoToPhotos: Bool = false
 /// Update this for save the video to your Photos.
 var willSaveVideoToPhotos: Bool = false
 
-/// Save original or save reduced image to photo roll. Works if `willSaveVideoToPhotos` is true.<br/>
+/// Save original or save reduced image to photo roll. 
+///Works if `willSaveVideoToPhotos` is true.
 var saveReducedImageToPhotos: Bool = false
 
 /// Set max picture file size in bytes.
 var maxPictureFileSize: Int = 400000
 
 /// Decide if the captured photo rotates upwards. 
-///After capturing, photo always oriented upwards if you set this flag to true.<br/>
+///After capturing, photo always oriented upwards if you set this flag to true.
 var rotateCapturedPhotoUpwards: Bool = false
 ```
 
