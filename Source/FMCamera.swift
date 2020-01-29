@@ -69,6 +69,7 @@ public class FMCamera: UIView {
     public var isCameraRecording: Bool = false
     private var isConfigured: Bool = false
     private var isRecordingSessionStarted: Bool = false
+    private var currentPosition: AVCaptureDevice.Position = .back
     
     // Config Parameters
     /**
@@ -113,13 +114,15 @@ public class FMCamera: UIView {
     public var audioSettings: [String: Any] = [:]
     /**
       Video settings for recording video. You can update it before calling configure()
+      Needs a ratio firts: `let ratio = frame.width / frame.height` You can specify a custom ratio
+      and change the values if you want.
      
      ### Default: ###
      ````
      [
          AVVideoCodecKey: AVVideoCodecType.h264,
          AVVideoWidthKey: 1080,
-         AVVideoHeightKey: 1080,
+         AVVideoHeightKey: 1080 * ratio,
          AVVideoScalingModeKey: AVVideoScalingModeResizeAspectFill
      ]
      ````
@@ -158,6 +161,16 @@ public class FMCamera: UIView {
      */
     public var saveReducedImageToPhotos: Bool = false
     
+    /**
+     Decide if the captured photo rotates upwards. After capturing, photo always oriented upwards if you set this flag to true.
+     
+      ### Default: ###
+      ````
+      false
+      ````
+     */
+    public var rotateCapturedPhotoUpwards: Bool = true
+    
     // Queue
     private var recordingQueue = DispatchQueue(label: "recording.queue")
     
@@ -181,6 +194,8 @@ public class FMCamera: UIView {
             UIView.AutoresizingMask.flexibleHeight
         ]
         
+        let ratio = frame.width / frame.height
+        
         audioSettings = [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
             AVNumberOfChannelsKey: 1,
@@ -190,7 +205,7 @@ public class FMCamera: UIView {
         videoSettings = [
             AVVideoCodecKey: AVVideoCodecType.h264,
             AVVideoWidthKey: 1080,
-            AVVideoHeightKey: 1080,
+            AVVideoHeightKey: 1080 * ratio,
             AVVideoScalingModeKey: AVVideoScalingModeResizeAspectFill
         ] as [String: Any]
         
@@ -340,6 +355,7 @@ extension FMCamera {
     
     public func flipCamera(_ position: AVCaptureDevice.Position) {
         if isConfigured {
+            currentPosition = position
             removeCaptureDeviceInput(position)
         } else {
             print("SC CAMERA ERROR: Please configure your camera view before flipping camera. ( Call configure() )")
@@ -521,31 +537,99 @@ extension FMCamera {
      - Returns: UIImage
      */
     private func cropToBounds(image: UIImage, width: CGFloat, height: CGFloat) -> UIImage {
-        let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
+        let cgimage = image.cgImage!
+        let contextImage: UIImage = UIImage(cgImage: cgimage)
         let contextSize: CGSize = contextImage.size
         var posX: CGFloat = 0.0
         var posY: CGFloat = 0.0
-        var cgwidth: CGFloat = width
-        var cgheight: CGFloat = height
-        // See what size is longer and create the center off of that
+        var cgwidth: CGFloat = CGFloat(width)
+        var cgheight: CGFloat = CGFloat(height)
+        
         if contextSize.width > contextSize.height {
-            posX = ((contextSize.width - contextSize.height) / 2)
+            let ratio = height / width
+            posX = ((contextSize.width - (contextSize.height * ratio)) / 2)
             posY = 0
-            cgwidth = contextSize.height
+            cgwidth = contextSize.height * ratio
             cgheight = contextSize.height
         } else {
+            let ratio = width / height
             posX = 0
             posY = ((contextSize.height - contextSize.width) / 2)
-            cgwidth = contextSize.width
+            cgwidth = contextSize.width * ratio
             cgheight = contextSize.width
         }
-        let rect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
-        // Create bitmap image from context using the rect
-        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
-        // Create a new image based on the imageRef and rotate back to the original orientation
-        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        
+        let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+        let imageRef: CGImage = cgimage.cropping(to: rect)!
+        var orientation: UIImage.Orientation = getOrientation(image)
+        if rotateCapturedPhotoUpwards {
+            if currentPosition == .back {
+                orientation = rotateBackUpwards()
+            } else {
+                orientation = rotateFrontUpwards()
+            }
+        }
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: orientation)
+        
         return image
     }
+    
+    /**
+    Gives the orientation for front and back camera seperately.
+    
+    - Parameter image: Image for getting image orientation
+    
+    - Returns: UIImage.Orientation
+    */
+    private func getOrientation(_ image: UIImage) -> UIImage.Orientation {
+        if currentPosition == .front {
+            return .leftMirrored
+        }
+        return image.imageOrientation
+    }
+    
+    /**
+    Works if `rotateCapturedPhotoUpwards` is true. Checks device orientation and returns image orientation photos captured with `back` camera.
+    
+    - Returns: UIImage.Orientation
+    */
+    private func rotateBackUpwards() -> UIImage.Orientation {
+        let deviceOrientation = UIDevice.current.orientation
+        switch deviceOrientation {
+        case .portrait:
+            return .right
+        case .portraitUpsideDown:
+            return .left
+        case .landscapeLeft:
+            return .up
+        case .landscapeRight:
+            return .down
+        default:
+            return .right
+        }
+    }
+    
+    /**
+    Works if 'rotateCapturedPhotoUpwards' is true. Checks device orientation and returns image orientation photos captured with `front` camera.
+    
+    - Returns: UIImage.Orientation
+    */
+    private func rotateFrontUpwards() -> UIImage.Orientation {
+        let deviceOrientation = UIDevice.current.orientation
+        switch deviceOrientation {
+        case .portrait:
+            return .leftMirrored
+        case .portraitUpsideDown:
+            return .rightMirrored
+        case .landscapeLeft:
+            return .downMirrored
+        case .landscapeRight:
+            return .upMirrored
+        default:
+            return .leftMirrored
+        }
+    }
+    
 }
 
 // MARK: - Image Processor

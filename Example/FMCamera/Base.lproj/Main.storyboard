@@ -96,9 +96,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cameraButton" width="16" height="16"/>
-        <image name="cameraButtonBg" width="16" height="16"/>
-        <image name="cameraFlash" width="16" height="16"/>
-        <image name="cameraFronRear" width="16" height="16"/>
+        <image name="cameraButton" width="61" height="61"/>
+        <image name="cameraButtonBg" width="89" height="89"/>
+        <image name="cameraFlash" width="26" height="23"/>
+        <image name="cameraFronRear" width="26" height="24"/>
     </resources>
 </document>
