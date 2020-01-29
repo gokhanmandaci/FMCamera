@@ -78,7 +78,7 @@ override func viewDidLoad() {
         
     // You can update configuration parameters here
     // or you can just use default ones.
-    vwSquareCamera.configure()
+    fmCamera.configure()
 }
 ```
 
@@ -86,13 +86,13 @@ override func viewDidLoad() {
 
 ```
 // Take Photo
-vwSquareCamera.takePhoto()
+fmCamera.takePhoto()
 
 // Capture Video
 if !fmCamera.isCameraRecording {
-    vwSquareCamera.startRecording()
+    fmCamera.startRecording()
 } else {
-    vwSquareCamera.stopRecording()
+    fmCamera.stopRecording()
 }
 ```
 
