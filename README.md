@@ -13,9 +13,17 @@ Built using XCode 11.3.1 (Swift 5)
 
 ## Screenshots
 
-<p>
-<img src = 'https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img1.png' width="200" />
-</p>
+<div class="row">
+  <div class="column">
+    <img src='https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img1.png' width="200" />
+  </div>
+  <div class="column">
+    <img src='https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img2.png' width="200" />
+  </div>
+  <div class="column">
+    <img src='https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img3.png' width="200" />
+  </div
+</div>
 
 ## Example
 
