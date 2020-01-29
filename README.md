@@ -145,19 +145,20 @@ var audioSettings: [String: Any] = [:]
 
 ### Before Taking a Photo:
 ```
-/// Update this for save the photo to your Photos.<br/>
+/// Update this for save the photo to your Photos.
 var willSavePhotoToPhotos: Bool = false
 
-/// Update this for save the video to your Photos.<br/>
+/// Update this for save the video to your Photos.
 var willSaveVideoToPhotos: Bool = false
 
 /// Save original or save reduced image to photo roll. Works if `willSaveVideoToPhotos` is true.<br/>
 var saveReducedImageToPhotos: Bool = false
 
-/// Set max picture file size in bytes.<br/>
+/// Set max picture file size in bytes.
 var maxPictureFileSize: Int = 400000
 
-/// Decide if the captured photo rotates upwards. After capturing, photo always oriented upwards if you set this flag to true.<br/>
+/// Decide if the captured photo rotates upwards. 
+///After capturing, photo always oriented upwards if you set this flag to true.<br/>
 var rotateCapturedPhotoUpwards: Bool = false
 ```
 
