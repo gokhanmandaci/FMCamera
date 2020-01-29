@@ -11,6 +11,12 @@ You can set maximum picture size and configure audio, video and picture settings
 
 Built using XCode 11.3.1 (Swift 5)
 
+## Screenshots
+
+<p>
+<img src = 'https://github.com/gokhanmandaci/FMCamera/tree/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset' width="200" />
+</p>
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
