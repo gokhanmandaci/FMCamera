@@ -13,6 +13,18 @@ Built using XCode 11.3.1 (Swift 5)
 
 ## Screenshots
 
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 <div class="row">
   <div class="column">
     <img src='https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img1.png' width="200" />
