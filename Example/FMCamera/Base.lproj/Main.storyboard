@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmM-cI-3fC" customClass="FMCamera" customModule="FMCamera">
-                                <rect key="frame" x="0.0" y="43.999999999999986" width="375" height="187.66666666666663"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="KmM-cI-3fC" secondAttribute="height" multiplier="2:1" id="22B-kb-UXU"/>
+                                    <constraint firstAttribute="width" secondItem="KmM-cI-3fC" secondAttribute="height" multiplier="1:1" id="22B-kb-UXU"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfe-EE-cef">
