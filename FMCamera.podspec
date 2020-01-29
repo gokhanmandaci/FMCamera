@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FMCamera'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'FMCamera is a simple camera view which let us capture photo or video in a given size.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/gokhanmandaci/FMCamera.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/gokhanmandaci'
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'Source/**/*'
   s.swift_version = '5.0'
