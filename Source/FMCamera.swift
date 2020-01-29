@@ -45,6 +45,7 @@ public class FMCamera: UIView {
     private var stillImageOutput: AVCapturePhotoOutput!
     
     // Connections
+
     private var videoDevice: AVCaptureDevice = AVCaptureDevice.default(for: .video)!
     private var audioConnection: AVCaptureConnection?
     private var videoConnection: AVCaptureConnection?
