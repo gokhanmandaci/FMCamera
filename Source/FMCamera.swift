@@ -169,7 +169,7 @@ public class FMCamera: UIView {
       false
       ````
      */
-    public var rotateCapturedPhotoUpwards: Bool = true
+    public var rotateCapturedPhotoUpwards: Bool = false
     
     // Queue
     private var recordingQueue = DispatchQueue(label: "recording.queue")
