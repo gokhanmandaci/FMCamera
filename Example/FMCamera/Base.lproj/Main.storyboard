@@ -17,15 +17,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmM-cI-3fC" customClass="FMCamera" customModule="FMCamera">
-                                <rect key="frame" x="0.0" y="44" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="43.999999999999986" width="375" height="187.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="KmM-cI-3fC" secondAttribute="height" multiplier="1:1" id="22B-kb-UXU"/>
+                                    <constraint firstAttribute="width" secondItem="KmM-cI-3fC" secondAttribute="height" multiplier="2:1" id="22B-kb-UXU"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfe-EE-cef">
                                 <rect key="frame" x="0.0" y="44" width="375" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="cfe-EE-cef" secondAttribute="height" multiplier="1:1" id="mLG-iq-vsJ"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="qhe-z7-W6t">
                                 <rect key="frame" x="53" y="649" width="269" height="89"/>
@@ -70,16 +73,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="cfe-EE-cef" firstAttribute="trailing" secondItem="tcd-AL-YhK" secondAttribute="trailing" id="5dq-h8-N8l"/>
                             <constraint firstItem="qhe-z7-W6t" firstAttribute="centerX" secondItem="JLE-Hp-8iG" secondAttribute="centerX" id="AsW-ye-U4U"/>
-                            <constraint firstItem="cfe-EE-cef" firstAttribute="top" secondItem="KmM-cI-3fC" secondAttribute="top" id="Mfu-Qg-nhV"/>
-                            <constraint firstItem="cfe-EE-cef" firstAttribute="bottom" secondItem="KmM-cI-3fC" secondAttribute="bottom" id="OkR-WS-xCC"/>
+                            <constraint firstItem="cfe-EE-cef" firstAttribute="leading" secondItem="tcd-AL-YhK" secondAttribute="leading" id="KI2-1F-XQ6"/>
                             <constraint firstItem="qhe-z7-W6t" firstAttribute="top" secondItem="6qG-Vq-5kK" secondAttribute="bottom" constant="8" id="b9M-7J-7Se"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="trailing" secondItem="6qG-Vq-5kK" secondAttribute="trailing" constant="16" id="br4-M8-1Tg"/>
-                            <constraint firstItem="cfe-EE-cef" firstAttribute="trailing" secondItem="KmM-cI-3fC" secondAttribute="trailing" id="l6l-4Z-pjc"/>
                             <constraint firstItem="KmM-cI-3fC" firstAttribute="leading" secondItem="tcd-AL-YhK" secondAttribute="leading" id="n8a-gb-JPB"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="bottom" secondItem="qhe-z7-W6t" secondAttribute="bottom" constant="40" id="oeT-mT-45t"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="trailing" secondItem="KmM-cI-3fC" secondAttribute="trailing" id="sTg-A5-8Ya"/>
-                            <constraint firstItem="cfe-EE-cef" firstAttribute="leading" secondItem="KmM-cI-3fC" secondAttribute="leading" id="w8A-AC-xVZ"/>
+                            <constraint firstItem="cfe-EE-cef" firstAttribute="top" secondItem="tcd-AL-YhK" secondAttribute="top" id="wAF-zn-ooW"/>
                             <constraint firstItem="KmM-cI-3fC" firstAttribute="top" secondItem="tcd-AL-YhK" secondAttribute="top" id="yqA-lz-QQp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tcd-AL-YhK"/>
