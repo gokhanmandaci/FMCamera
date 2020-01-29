@@ -14,7 +14,7 @@ Built using XCode 11.3.1 (Swift 5)
 ## Screenshots
 
 <p>
-<img src = 'https://github.com/gokhanmandaci/FMCamera/tree/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset' width="200" />
+<img src = 'https://raw.githubusercontent.com/gokhanmandaci/FMCamera/master/Example/FMCamera/Images.xcassets/Screenshots/img1.imageset/img1.png' width="200" />
 </p>
 
 ## Example
