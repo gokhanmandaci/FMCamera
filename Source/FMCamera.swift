@@ -45,7 +45,7 @@ public class FMCamera: UIView {
     private var stillImageOutput: AVCapturePhotoOutput!
     
     // Connections
-
+    
     private var videoDevice: AVCaptureDevice = AVCaptureDevice.default(for: .video)!
     private var audioConnection: AVCaptureConnection?
     private var videoConnection: AVCaptureConnection?
@@ -251,16 +251,17 @@ extension FMCamera {
             if assetWriter != nil {
                 if assetWriter!.status == .unknown {
                     assetWriter!.startWriting()
-                } else {
-                    assetWriter = nil
-                    reconfigure()
-                    startRecording()
                 }
                 videoOutput.setSampleBufferDelegate(self, queue: recordingQueue)
                 audioOutput.setSampleBufferDelegate(self, queue: recordingQueue)
                 isCameraRecording = true
             } else {
-                reconfigure()
+                configureSession()
+                addSettings()
+                isRecordingSessionStarted = false
+                if session.isRunning {
+                    session.startRunning()
+                }
                 startRecording()
             }
         } else {
@@ -357,7 +358,7 @@ extension FMCamera {
     public func flipCamera(_ position: AVCaptureDevice.Position) {
         if isConfigured {
             currentPosition = position
-            removeCaptureDeviceInput(position)
+            addCaptureDeviceInput(position)
         } else {
             print("SC CAMERA ERROR: Please configure your camera view before flipping camera. ( Call configure() )")
         }
@@ -379,23 +380,6 @@ extension FMCamera {
         addOutputsToSession()
         session.startRunning()
         isConfigured = true
-    }
-    
-    private func reconfigure() {
-        deviceInput = nil
-        previewLayer?.removeFromSuperlayer()
-        previewLayer = nil
-        stillImageOutput = nil
-        audioConnection = nil
-        videoConnection = nil
-        assetWriter = nil
-        audioInput = nil
-        videoInput = nil
-        recordingURL = nil
-        isCameraRecording = false
-        isConfigured = false
-        isRecordingSessionStarted = false
-        readyForConfiguration()
     }
     
     /**
@@ -443,6 +427,11 @@ extension FMCamera {
      Step 3: Add capture device input to session
      */
     private func addCaptureDeviceInput(_ position: AVCaptureDevice.Position = .back) {
+        if deviceInput != nil {
+            if session.inputs.contains(deviceInput!) {
+                session.removeInput(deviceInput!)
+            }
+        }
         if let device = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: position).devices.first {
             do {
                 deviceInput = try AVCaptureDeviceInput(device: device)
@@ -462,13 +451,6 @@ extension FMCamera {
      */
     private func setPhotoOutput() {
         stillImageOutput = AVCapturePhotoOutput()
-    }
-    
-    private func removeCaptureDeviceInput(_ position: AVCaptureDevice.Position = .back) {
-        if deviceInput != nil {
-            session.removeInput(deviceInput!)
-        }
-        addCaptureDeviceInput(position)
     }
     
     /**
@@ -576,12 +558,12 @@ extension FMCamera {
     }
     
     /**
-    Gives the orientation for front and back camera seperately.
-    
-    - Parameter image: Image for getting image orientation
-    
-    - Returns: UIImage.Orientation
-    */
+     Gives the orientation for front and back camera seperately.
+     
+     - Parameter image: Image for getting image orientation
+     
+     - Returns: UIImage.Orientation
+     */
     private func getOrientation(_ image: UIImage) -> UIImage.Orientation {
         if currentPosition == .front {
             return .leftMirrored
@@ -590,10 +572,10 @@ extension FMCamera {
     }
     
     /**
-    Works if `rotateCapturedPhotoUpwards` is true. Checks device orientation and returns image orientation photos captured with `back` camera.
-    
-    - Returns: UIImage.Orientation
-    */
+     Works if `rotateCapturedPhotoUpwards` is true. Checks device orientation and returns image orientation photos captured with `back` camera.
+     
+     - Returns: UIImage.Orientation
+     */
     private func rotateBackUpwards() -> UIImage.Orientation {
         let deviceOrientation = UIDevice.current.orientation
         switch deviceOrientation {
@@ -611,10 +593,10 @@ extension FMCamera {
     }
     
     /**
-    Works if 'rotateCapturedPhotoUpwards' is true. Checks device orientation and returns image orientation photos captured with `front` camera.
-    
-    - Returns: UIImage.Orientation
-    */
+     Works if 'rotateCapturedPhotoUpwards' is true. Checks device orientation and returns image orientation photos captured with `front` camera.
+     
+     - Returns: UIImage.Orientation
+     */
     private func rotateFrontUpwards() -> UIImage.Orientation {
         let deviceOrientation = UIDevice.current.orientation
         switch deviceOrientation {
@@ -630,7 +612,6 @@ extension FMCamera {
             return .leftMirrored
         }
     }
-    
 }
 
 // MARK: - Image Processor
@@ -695,7 +676,7 @@ extension FMCamera: AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureVideo
                 if videoInput != nil {
                     if videoInput!.isReadyForMoreMediaData {
                         if !videoInput!.append(sampleBuffer) {
-                            print("Error writing video buffer")
+                            print("SC CAMERA ERROR: Writing video buffer")
                         }
                     }
                 }
