@@ -25,7 +25,7 @@ public var fmCaptureVideoDelegate: FMCaptureVideoProtocol?
  With this protocol you can start and stop recording.
  */
 public protocol FMCapturePhotoProtocol {
-    func captured(_ image: UIImage)
+    func captured(_ image: UIImage, data: Data)
 }
 
 /// Delegate for capture photo event.
@@ -648,7 +648,7 @@ extension FMCamera {
             if willSavePhotoToPhotos, saveReducedImageToPhotos {
                 savePhoto(reducedImage)
             }
-            fmCapturePhotoDelegate?.captured(reducedImage)
+            fmCapturePhotoDelegate?.captured(reducedImage, data: data)
         } else {
             print("SC CAMERA ERROR: Cannot reduce the image.")
         }
