@@ -84,6 +84,7 @@ extension MainVC: FMCaptureVideoProtocol {
                     print(error.localizedDescription)
                 }
                 
+                imgCapture.image = vwSquareCamera.getVideoThumbnail()
                 vwVideoPlayer.isHidden = false
                 avPlayer = AVPlayer(url: url)
                 avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -102,7 +103,7 @@ extension MainVC: FMCaptureVideoProtocol {
 }
 
 extension MainVC: FMCapturePhotoProtocol {
-    func captured(_ image: UIImage) {
+    func captured(_ image: UIImage, data: Data) {
         imgCapture.image = image
     }
 }

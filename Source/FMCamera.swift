@@ -311,6 +311,46 @@ extension FMCamera {
     }
     
     /**
+     Get video thumbnail. Returns first captured frame.
+     You can set copy time.
+     
+     - Parameter sourceURL: Source url for recorded video. Default to FMCamera's recorded video.
+     - Parameter copyTime: Time for video thumb image. Default to the first frame
+     
+     ### Usage Example: ###
+     ````
+     getVideoThumbnail(url)
+     getVideoThumbnail(url, copyTime: CMTime(seconds: 2, preferredTimescale: 60))
+     ````
+     
+     - Returns: UIImage.
+     */
+    public func getVideoThumbnail(_ sourceURL: URL? = nil, copyTime: CMTime = CMTime(seconds: 0, preferredTimescale: 60)) -> UIImage? {
+        if let url = sourceURL {
+            return makeThumbnail(url, copyTime)
+        } else if let url = recordingURL {
+            return makeThumbnail(url, copyTime)
+        }
+        return nil
+    }
+    
+    /**
+    Makes a thumbnail with a given parameters.
+    */
+    private func makeThumbnail(_ url: URL, _ copyTime: CMTime) -> UIImage? {
+        let urlAsset: AVAsset = AVAsset(url: url)
+        let assetImages = AVAssetImageGenerator(asset: urlAsset)
+        
+        do {
+            let thumbnailImage = try assetImages.copyCGImage(at: copyTime, actualTime: nil)
+            return UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .right)
+        } catch {
+            print(error)
+        }
+        return  nil
+    }
+    
+    /**
      Saves recorded video to photo roll
      */
     private func saveVideo() {
