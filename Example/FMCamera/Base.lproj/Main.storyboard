@@ -39,6 +39,9 @@
                                             <constraint firstAttribute="width" constant="50" id="926-zF-kQv"/>
                                         </constraints>
                                         <state key="normal" image="cameraFlash"/>
+                                        <connections>
+                                            <action selector="btnFlashAction:" destination="DVJ-ff-9PM" eventType="touchUpInside" id="deX-tQ-3wA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orK-tl-cB9">
                                         <rect key="frame" x="90" y="0.0" width="89" height="89"/>
@@ -87,6 +90,7 @@
                         <viewLayoutGuide key="safeArea" id="tcd-AL-YhK"/>
                     </view>
                     <connections>
+                        <outlet property="btnFlash" destination="I0a-kQ-Uji" id="3MT-4h-V3v"/>
                         <outlet property="imgCapture" destination="6qG-Vq-5kK" id="gZx-uO-tgc"/>
                         <outlet property="vwSquareCamera" destination="KmM-cI-3fC" id="4CK-2J-jpf"/>
                         <outlet property="vwVideoPlayer" destination="cfe-EE-cef" id="ClJ-t2-Kyw"/>

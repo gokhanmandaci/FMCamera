@@ -20,23 +20,24 @@ class MainVC: UIViewController {
     @IBOutlet weak var vwSquareCamera: FMCamera!
     @IBOutlet weak var vwVideoPlayer: UIView!
     @IBOutlet weak var imgCapture: UIImageView!
+    @IBOutlet weak var btnFlash: UIButton!
     
     // MARK: - Actions
     @IBAction func btnCaptureAction(_ sender: Any) {
-        if !vwSquareCamera.isCameraRecording {
-            vwVideoPlayer.isHidden = true
-            if avPlayer != nil {
-                avPlayer?.pause()
-                avPlayer = nil
-            }
-            avPlayerLayer?.removeFromSuperlayer()
-            avPlayerLayer = nil
-            vwSquareCamera.startRecording()
-        } else {
-            vwSquareCamera.stopRecording()
-        }
-//        vwSquareCamera.maxPictureFileSize = 250000
-//        vwSquareCamera.takePhoto()
+//        if !vwSquareCamera.isCameraRecording {
+//            vwVideoPlayer.isHidden = true
+//            if avPlayer != nil {
+//                avPlayer?.pause()
+//                avPlayer = nil
+//            }
+//            avPlayerLayer?.removeFromSuperlayer()
+//            avPlayerLayer = nil
+//            vwSquareCamera.startRecording()
+//        } else {
+//            vwSquareCamera.stopRecording()
+//        }
+        vwSquareCamera.maxPictureFileSize = 250000
+        vwSquareCamera.takePhoto()
     }
     
     @IBAction func btnFlipCameraAction(_ sender: Any) {
@@ -46,6 +47,19 @@ class MainVC: UIViewController {
         } else {
             vwSquareCamera.flipCamera(.back)
             position = .back
+        }
+    }
+    
+    @IBAction func btnFlashAction(_ sender: Any) {
+        switch vwSquareCamera.flashMode {
+        case .off, .auto:
+            vwSquareCamera.flashMode = .on
+            btnFlash.setImage(UIImage(named: "cameraFlashOpen"), for: .normal)
+        case .on:
+            vwSquareCamera.flashMode = .off
+            btnFlash.setImage(UIImage(named: "cameraFlash"), for: .normal)
+        @unknown default:
+            break
         }
     }
     

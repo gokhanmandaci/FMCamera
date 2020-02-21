@@ -303,7 +303,14 @@ extension FMCamera {
                     AVVideoCodecKey: AVVideoCodecType.jpeg
                 ])
             }
-            settings.flashMode = flashMode
+            
+            if let dInput = deviceInput {
+                if dInput.device.hasFlash {
+                    settings.flashMode = flashMode
+                } else {
+                    settings.flashMode = .off
+                }
+            }
             stillImageOutput.capturePhoto(with: settings, delegate: self)
         } else {
             print("SC CAMERA ERROR: Please configure your camera view before taking photo. ( Call configure() )")
