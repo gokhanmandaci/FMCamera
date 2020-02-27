@@ -73,16 +73,25 @@
                                     <constraint firstAttribute="width" constant="100" id="ZVz-dc-fqV"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGw-nt-fsa">
+                                <rect key="frame" x="54" y="576" width="48" height="30"/>
+                                <state key="normal" title="Library"/>
+                                <connections>
+                                    <action selector="btnLibraryAction:" destination="DVJ-ff-9PM" eventType="touchUpInside" id="Hjr-Hx-1Gf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cfe-EE-cef" firstAttribute="trailing" secondItem="tcd-AL-YhK" secondAttribute="trailing" id="5dq-h8-N8l"/>
                             <constraint firstItem="qhe-z7-W6t" firstAttribute="centerX" secondItem="JLE-Hp-8iG" secondAttribute="centerX" id="AsW-ye-U4U"/>
+                            <constraint firstItem="NGw-nt-fsa" firstAttribute="centerY" secondItem="6qG-Vq-5kK" secondAttribute="centerY" id="Bmq-nA-nNn"/>
                             <constraint firstItem="cfe-EE-cef" firstAttribute="leading" secondItem="tcd-AL-YhK" secondAttribute="leading" id="KI2-1F-XQ6"/>
                             <constraint firstItem="qhe-z7-W6t" firstAttribute="top" secondItem="6qG-Vq-5kK" secondAttribute="bottom" constant="8" id="b9M-7J-7Se"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="trailing" secondItem="6qG-Vq-5kK" secondAttribute="trailing" constant="16" id="br4-M8-1Tg"/>
                             <constraint firstItem="KmM-cI-3fC" firstAttribute="leading" secondItem="tcd-AL-YhK" secondAttribute="leading" id="n8a-gb-JPB"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="bottom" secondItem="qhe-z7-W6t" secondAttribute="bottom" constant="40" id="oeT-mT-45t"/>
+                            <constraint firstItem="NGw-nt-fsa" firstAttribute="centerX" secondItem="I0a-kQ-Uji" secondAttribute="centerX" id="qSb-8b-rOv"/>
                             <constraint firstItem="tcd-AL-YhK" firstAttribute="trailing" secondItem="KmM-cI-3fC" secondAttribute="trailing" id="sTg-A5-8Ya"/>
                             <constraint firstItem="cfe-EE-cef" firstAttribute="top" secondItem="tcd-AL-YhK" secondAttribute="top" id="wAF-zn-ooW"/>
                             <constraint firstItem="KmM-cI-3fC" firstAttribute="top" secondItem="tcd-AL-YhK" secondAttribute="top" id="yqA-lz-QQp"/>

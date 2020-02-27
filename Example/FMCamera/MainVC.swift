@@ -9,12 +9,15 @@
 import AVFoundation
 import UIKit
 import FMCamera
+import MobileCoreServices
 
 class MainVC: UIViewController {
     // MARK: - Parameters
     private var avPlayer: AVPlayer?
     private var avPlayerLayer: AVPlayerLayer?
     private var position: AVCaptureDevice.Position = .back
+    let imagePicker = UIImagePickerController()
+    private var originalVideoUrl: URL?
     
     // MARK: - Outlets
     @IBOutlet weak var vwSquareCamera: FMCamera!
@@ -63,19 +66,46 @@ class MainVC: UIViewController {
         }
     }
     
+    @IBAction func btnLibraryAction(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage, kUTTypeMovie, kUTTypeMPEG4] as [String]
+            imagePicker.allowsEditing = true
+            imagePicker.videoMaximumDuration = 30.0
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fmCaptureVideoDelegate = self
         fmCapturePhotoDelegate = self
+        imagePicker.delegate = self
         
         vwSquareCamera.configure()
     }
 }
 
 // MARK: - Class Functions
-extension MainVC {}
+extension MainVC {
+    private func makeReady(_ url: URL) {
+        vwVideoPlayer.isHidden = false
+        avPlayer = AVPlayer(url: url)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer?.videoGravity = .resizeAspect
+        if avPlayerLayer != nil {
+            vwVideoPlayer.layer.addSublayer(avPlayerLayer!)
+            avPlayerLayer?.frame = vwVideoPlayer.bounds
+            
+            if avPlayer != nil {
+                avPlayer!.play()
+            }
+        }
+    }
+}
 
 extension MainVC: FMCaptureVideoProtocol {
     func recordingStarted(_ error: Error?) {
@@ -99,18 +129,7 @@ extension MainVC: FMCaptureVideoProtocol {
                 }
                 
                 imgCapture.image = vwSquareCamera.getVideoThumbnail()
-                vwVideoPlayer.isHidden = false
-                avPlayer = AVPlayer(url: url)
-                avPlayerLayer = AVPlayerLayer(player: avPlayer)
-                avPlayerLayer?.videoGravity = .resizeAspect
-                if avPlayerLayer != nil {
-                    vwVideoPlayer.layer.addSublayer(avPlayerLayer!)
-                    avPlayerLayer?.frame = vwVideoPlayer.bounds
-                    
-                    if avPlayer != nil {
-                        avPlayer!.play()
-                    }
-                }
+                makeReady(url)
             }
         }
     }
@@ -119,5 +138,15 @@ extension MainVC: FMCaptureVideoProtocol {
 extension MainVC: FMCapturePhotoProtocol {
     func captured(_ image: UIImage, data: Data) {
         imgCapture.image = image
+    }
+}
+
+extension MainVC: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let url = info[.mediaURL] as? URL {
+            imgCapture.image = vwSquareCamera.getVideoThumbnail(url, copyTime: .zero, source: .library)
+            makeReady(url)
+        }
     }
 }

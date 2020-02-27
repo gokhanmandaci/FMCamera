@@ -31,6 +31,12 @@ public protocol FMCapturePhotoProtocol {
 /// Delegate for capture photo event.
 public var fmCapturePhotoDelegate: FMCapturePhotoProtocol?
 
+/// Use when getting video when you use library or camera.
+public enum VideoSource {
+    case camera
+    case library
+}
+
 public class FMCamera: UIView {
     // MARK: Parameters
     private var session: AVCaptureSession = AVCaptureSession()
@@ -332,9 +338,9 @@ extension FMCamera {
      
      - Returns: UIImage.
      */
-    public func getVideoThumbnail(_ sourceURL: URL? = nil, copyTime: CMTime = CMTime(seconds: 0, preferredTimescale: 60)) -> UIImage? {
+    public func getVideoThumbnail(_ sourceURL: URL? = nil, copyTime: CMTime = CMTime(seconds: 0, preferredTimescale: 60), source: VideoSource = .camera) -> UIImage? {
         if let url = sourceURL {
-            return makeThumbnail(url, copyTime)
+            return makeThumbnail(url, copyTime, source: source)
         } else if let url = recordingURL {
             return makeThumbnail(url, copyTime)
         }
@@ -344,13 +350,17 @@ extension FMCamera {
     /**
     Makes a thumbnail with a given parameters.
     */
-    private func makeThumbnail(_ url: URL, _ copyTime: CMTime) -> UIImage? {
+    private func makeThumbnail(_ url: URL, _ copyTime: CMTime, source: VideoSource = .camera) -> UIImage? {
         let urlAsset: AVAsset = AVAsset(url: url)
         let assetImages = AVAssetImageGenerator(asset: urlAsset)
         
         do {
             let thumbnailImage = try assetImages.copyCGImage(at: copyTime, actualTime: nil)
-            return UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .right)
+            if source == .camera {
+                return UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .right)
+            } else {
+                return UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .up)
+            }
         } catch {
             print(error)
         }
