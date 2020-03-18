@@ -85,6 +85,8 @@ class MainVC: UIViewController {
         fmCapturePhotoDelegate = self
         imagePicker.delegate = self
         
+        vwSquareCamera.sPreset = .low
+        
         vwSquareCamera.configure()
     }
 }

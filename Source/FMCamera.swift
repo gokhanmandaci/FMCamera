@@ -88,7 +88,14 @@ public class FMCamera: UIView {
      */
     public var flashMode: AVCaptureDevice.FlashMode = .auto
     
-    public var sPreset: AVCaptureSession.Preset = .low
+    /**
+    Set preset for capture session
+    ### Default: ###
+    ````
+    .medium
+    ````
+    */
+    public var sPreset: AVCaptureSession.Preset = .medium
     
     /**
       Update this for save the photo to your Photos.
