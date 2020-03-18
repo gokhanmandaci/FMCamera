@@ -80,6 +80,15 @@ public class FMCamera: UIView {
     
     // Config Parameters
     /**
+     Set this parameter true to configure camera view for capturing only photo.
+      ### Default: ###
+      ````
+      false
+      ````
+     */
+    public var setForPhotoCapturingOnly: Bool = false
+    
+    /**
      Flash mode for capturing. You can update it before calling configure()
      ### Default: ###
      ````
@@ -89,12 +98,12 @@ public class FMCamera: UIView {
     public var flashMode: AVCaptureDevice.FlashMode = .auto
     
     /**
-    Set preset for capture session
-    ### Default: ###
-    ````
-    .medium
-    ````
-    */
+     Set preset for capture session
+     ### Default: ###
+     ````
+     .medium
+     ````
+     */
     public var sPreset: AVCaptureSession.Preset = .medium
     
     /**
@@ -358,8 +367,8 @@ extension FMCamera {
     }
     
     /**
-    Makes a thumbnail with a given parameters.
-    */
+     Makes a thumbnail with a given parameters.
+     */
     private func makeThumbnail(_ url: URL, _ copyTime: CMTime, source: VideoSource = .camera) -> UIImage? {
         let urlAsset: AVAsset = AVAsset(url: url)
         let assetImages = AVAssetImageGenerator(asset: urlAsset)
@@ -374,7 +383,7 @@ extension FMCamera {
         } catch {
             print(error)
         }
-        return  nil
+        return nil
     }
     
     /**
@@ -455,12 +464,14 @@ extension FMCamera {
      */
     private func configureSession() {
         session.sessionPreset = sPreset
-        recordingURL = URL(fileURLWithPath: "\(NSTemporaryDirectory() as String)file.mp4")
-        if fileManager.isDeletableFile(atPath: recordingURL!.path) {
-            _ = try? fileManager.removeItem(atPath: recordingURL!.path)
+        if !setForPhotoCapturingOnly {
+            recordingURL = URL(fileURLWithPath: "\(NSTemporaryDirectory() as String)file.mp4")
+            if fileManager.isDeletableFile(atPath: recordingURL!.path) {
+                _ = try? fileManager.removeItem(atPath: recordingURL!.path)
+            }
+            assetWriter = try? AVAssetWriter(outputURL: recordingURL!,
+                                             fileType: AVFileType.mp4)
         }
-        assetWriter = try? AVAssetWriter(outputURL: recordingURL!,
-                                         fileType: AVFileType.mp4)
     }
     
     /**
@@ -468,7 +479,9 @@ extension FMCamera {
      */
     private func addSettings() {
         videoInput = AVAssetWriterInput(mediaType: .video, outputSettings: videoSettings)
-        audioInput = AVAssetWriterInput(mediaType: .audio, outputSettings: audioSettings)
+        if !setForPhotoCapturingOnly {
+            audioInput = AVAssetWriterInput(mediaType: .audio, outputSettings: audioSettings)
+        }
         
         if videoInput != nil {
             videoInput!.expectsMediaDataInRealTime = true
@@ -479,12 +492,13 @@ extension FMCamera {
                 }
             }
         }
-        
-        if audioInput != nil {
-            audioInput!.expectsMediaDataInRealTime = true
-            if assetWriter != nil {
-                if assetWriter!.canAdd(audioInput!) {
-                    assetWriter!.add(audioInput!)
+        if !setForPhotoCapturingOnly {
+            if audioInput != nil {
+                audioInput!.expectsMediaDataInRealTime = true
+                if assetWriter != nil {
+                    if assetWriter!.canAdd(audioInput!) {
+                        assetWriter!.add(audioInput!)
+                    }
                 }
             }
         }
@@ -538,9 +552,10 @@ extension FMCamera {
      */
     private func addOutputsToSession() {
         session.beginConfiguration()
-        
-        if session.canAddOutput(videoOutput) {
-            session.addOutput(videoOutput)
+        if !setForPhotoCapturingOnly {
+            if session.canAddOutput(videoOutput) {
+                session.addOutput(videoOutput)
+            }
         }
         
         if stillImageOutput != nil {
@@ -548,28 +563,31 @@ extension FMCamera {
                 session.addOutput(stillImageOutput)
             }
         }
-        
-        videoConnection = videoOutput.connection(with: .video)
-        if videoConnection?.isVideoStabilizationSupported == true {
-            videoConnection?.preferredVideoStabilizationMode = .auto
+        if !setForPhotoCapturingOnly {
+            videoConnection = videoOutput.connection(with: .video)
+            if videoConnection?.isVideoStabilizationSupported == true {
+                videoConnection?.preferredVideoStabilizationMode = .auto
+            }
         }
         session.commitConfiguration()
         
-        if let audioDevice = AVCaptureDevice.default(for: .audio) {
-            do {
-                let audioIn = try AVCaptureDeviceInput(device: audioDevice)
-                
-                if session.canAddInput(audioIn) {
-                    session.addInput(audioIn)
+        if !setForPhotoCapturingOnly {
+            if let audioDevice = AVCaptureDevice.default(for: .audio) {
+                do {
+                    let audioIn = try AVCaptureDeviceInput(device: audioDevice)
+                    
+                    if session.canAddInput(audioIn) {
+                        session.addInput(audioIn)
+                    }
+                    
+                    if session.canAddOutput(audioOutput) {
+                        session.addOutput(audioOutput)
+                    }
+                    
+                    audioConnection = audioOutput.connection(with: .audio)
+                } catch {
+                    print(error.localizedDescription)
                 }
-                
-                if session.canAddOutput(audioOutput) {
-                    session.addOutput(audioOutput)
-                }
-                
-                audioConnection = audioOutput.connection(with: .audio)
-            } catch {
-                print(error.localizedDescription)
             }
         }
     }
