@@ -27,20 +27,20 @@ class MainVC: UIViewController {
     
     // MARK: - Actions
     @IBAction func btnCaptureAction(_ sender: Any) {
-        if !vwSquareCamera.isCameraRecording {
-            vwVideoPlayer.isHidden = true
-            if avPlayer != nil {
-                avPlayer?.pause()
-                avPlayer = nil
-            }
-            avPlayerLayer?.removeFromSuperlayer()
-            avPlayerLayer = nil
-            vwSquareCamera.startRecording()
-        } else {
-            vwSquareCamera.stopRecording()
-        }
-//        vwSquareCamera.maxPictureFileSize = 250000
-//        vwSquareCamera.takePhoto()
+//        if !vwSquareCamera.isCameraRecording {
+//            vwVideoPlayer.isHidden = true
+//            if avPlayer != nil {
+//                avPlayer?.pause()
+//                avPlayer = nil
+//            }
+//            avPlayerLayer?.removeFromSuperlayer()
+//            avPlayerLayer = nil
+//            vwSquareCamera.startRecording()
+//        } else {
+//            vwSquareCamera.stopRecording()
+//        }
+        vwSquareCamera.maxPictureFileSize = 250000
+        vwSquareCamera.takePhoto()
     }
     
     @IBAction func btnFlipCameraAction(_ sender: Any) {
@@ -86,6 +86,7 @@ class MainVC: UIViewController {
         imagePicker.delegate = self
         
         vwSquareCamera.sPreset = .low
+        vwSquareCamera.setForPhotoCapturingOnly = false
         
         vwSquareCamera.configure()
     }

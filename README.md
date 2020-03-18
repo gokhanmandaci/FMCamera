@@ -133,6 +133,10 @@ We have two types of configuration parameters. Before calling `fmcamera.configur
 /// Set session preset with<br/>
 var sPreset: AVCaptureSession.Preset = .medium
 
+/// Set this parameter to TRUE if you want to use 
+/// FMCamera just for photo capturing.<br/>
+var setForPhotoCapturingOnly: Bool = false
+
 ///Flash mode for capturing.<br/>
 var flashMode: AVCaptureDevice.FlashMode = .auto
 
