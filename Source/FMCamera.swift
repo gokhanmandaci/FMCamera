@@ -87,6 +87,9 @@ public class FMCamera: UIView {
      ````
      */
     public var flashMode: AVCaptureDevice.FlashMode = .auto
+    
+    public var sPreset: AVCaptureSession.Preset = .low
+    
     /**
       Update this for save the photo to your Photos.
      
@@ -444,7 +447,7 @@ extension FMCamera {
       is file.mp4
      */
     private func configureSession() {
-        session.sessionPreset = .high
+        session.sessionPreset = sPreset
         recordingURL = URL(fileURLWithPath: "\(NSTemporaryDirectory() as String)file.mp4")
         if fileManager.isDeletableFile(atPath: recordingURL!.path) {
             _ = try? fileManager.removeItem(atPath: recordingURL!.path)
