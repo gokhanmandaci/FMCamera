@@ -117,7 +117,7 @@ extension ViewController: FMCaptureVideoProtocol {
 
 
 extension ViewController: FMCapturePhotoProtocol {
-    func captured(_ image: UIImage) {
+    func captured(_ image: UIImage, data: Data) {
         /// Use captured and optimized image
     }
 }
