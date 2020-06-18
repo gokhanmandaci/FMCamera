@@ -165,6 +165,9 @@ var saveReducedImageToPhotos: Bool = false
 /// Set max picture file size in bytes.
 var maxPictureFileSize: Int = 400000
 
+/// Set this to false if you want to optimize images yourself.
+var optimizeImage: Bool = true
+
 /// Decide if the captured photo rotates upwards. 
 ///After capturing, photo always oriented upwards if you set this flag to true.
 var rotateCapturedPhotoUpwards: Bool = false

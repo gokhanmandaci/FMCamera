@@ -177,6 +177,16 @@ public class FMCamera: UIView {
     public var maxPictureFileSize: Int = 400000
     
     /**
+      Optimize image.
+     
+     ### Default: ###
+     ````
+     true
+     ````
+     */
+    public var optimizeImage: Bool = true
+    
+    /**
       Save original or save reduced image to photo roll. You can update it before taking a picture.
      Works if willSaveVideoToPhotos is true.
      
@@ -776,7 +786,11 @@ extension FMCamera: AVCapturePhotoCaptureDelegate {
         guard let data = photo.fileDataRepresentation() else { return }
         if let capturedImage = UIImage(data: data) {
             let croppedImage = cropToBounds(image: capturedImage, width: frame.width, height: frame.height)
-            processImage(croppedImage)
+            if optimizeImage {
+                processImage(croppedImage)
+            } else {
+                fmCapturePhotoDelegate?.captured(croppedImage, data: data)
+            }
             if willSavePhotoToPhotos {
                 if !saveReducedImageToPhotos {
                     savePhoto(croppedImage)
