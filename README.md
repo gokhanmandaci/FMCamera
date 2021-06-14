@@ -9,7 +9,7 @@ Simple camera view which can take pictures and capture photos. Camera view crops
 You can capture square videos. There are two Protocols which provide communication between your view controllers and fmcamera view.
 You can set maximum picture size and configure audio, video and picture settings if you want. Also you can get a thumbnail image for your video.
 
-Built using XCode 11.3.1 (Swift 5)
+Built using XCode 12.5 (Swift 5)
 
 ## Screenshots
 
