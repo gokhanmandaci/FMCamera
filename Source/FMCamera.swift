@@ -76,7 +76,6 @@ public class FMCamera: UIView {
     public var isCameraRecording: Bool = false
     private var isConfigured: Bool = false
     private var isRecordingSessionStarted: Bool = false
-    private var currentPosition: AVCaptureDevice.Position = .back
     
     // Config Parameters
     /**
@@ -87,6 +86,15 @@ public class FMCamera: UIView {
       ````
      */
     public var setForPhotoCapturingOnly: Bool = false
+    
+    /**
+     Set this parameter true to configure front or back camera.
+      ### Default: ###
+      ````
+      AVCaptureDevice.Position.back
+      ````
+     */
+    public var captureDevicePosition: AVCaptureDevice.Position = .back
     
     /**
      Flash mode for capturing. You can update it before calling configure()
@@ -443,7 +451,7 @@ extension FMCamera {
     
     public func flipCamera(_ position: AVCaptureDevice.Position) {
         if isConfigured {
-            currentPosition = position
+            captureDevicePosition = position
             addCaptureDeviceInput(position)
         } else {
             print("SC CAMERA ERROR: Please configure your camera view before flipping camera. ( Call configure() )")
@@ -641,7 +649,7 @@ extension FMCamera {
         let imageRef: CGImage = cgimage.cropping(to: rect)!
         var orientation: UIImage.Orientation = getOrientation(image)
         if rotateCapturedPhotoUpwards {
-            if currentPosition == .back {
+            if captureDevicePosition == .back {
                 orientation = rotateBackUpwards()
             } else {
                 orientation = rotateFrontUpwards()
@@ -660,7 +668,7 @@ extension FMCamera {
      - Returns: UIImage.Orientation
      */
     private func getOrientation(_ image: UIImage) -> UIImage.Orientation {
-        if currentPosition == .front {
+        if captureDevicePosition == .front {
             return .leftMirrored
         }
         return image.imageOrientation
