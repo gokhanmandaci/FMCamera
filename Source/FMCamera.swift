@@ -468,7 +468,7 @@ extension FMCamera {
     private func readyForConfiguration() {
         configureSession()
         addSettings()
-        addCaptureDeviceInput()
+        addCaptureDeviceInput(captureDevicePosition)
         setPhotoOutput()
         configurePreviewLayer()
         addOutputsToSession()
