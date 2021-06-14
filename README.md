@@ -143,6 +143,9 @@ var flashMode: AVCaptureDevice.FlashMode = .auto
 /// Capture photo format.<br/>
 var photoSettingsFormat: [String: Any]?
 
+/// Set default camera, front or back.<br/>
+var captureDevicePosition: AVCaptureDevice.Position = .back
+
 /// Video settings for recording video.<br/>
 var videoSettings: [String: Any] = [:]
 
